@@ -11,7 +11,7 @@ class EmailingURLGenerator(URLGeneratorBase):
         missing_params = [param for param in required_params if param not in params or not params[param]]
         
         if missing_params:
-            raise ValueError(f"Missing required parameters: {', '.join(missing_params)}")
+            raise ValueError(f"Faltan parámetros obligatorios: {', '.join(missing_params)}")
 
     def generate_urls(self, params):
         """Genera las URLs para el canal Emailing."""

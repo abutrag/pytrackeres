@@ -12,7 +12,7 @@ class DisplayURLGenerator(URLGeneratorBase):
         missing_params = [param for param in required_params if param not in params or not params[param]]
         
         if missing_params:
-            raise ValueError(f"Missing required parameters: {', '.join(missing_params)}")
+            raise ValueError(f"Faltan parámetros obligatorios: {', '.join(missing_params)}")
 
     def adjust_for_special_cases(self, params):
         """Ajusta las URLs para soportes especiales como Google, Amazon y Outbrain."""

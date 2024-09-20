@@ -66,7 +66,7 @@ def show_csv_template(channel):
 
 def main():
     # Preguntar por el canal primero
-    canal_input = input("Enter the channel to process (dy for Display, af for Afiliación, em for Emailing, co para Colaboración, cp para Comparador de Precios, ga para Google Ads, ba para Bing Ads, sc para Social): ")
+    canal_input = input("Introduce el nombre del canal para procesar (dy para Display, af para Afiliación, em para Emailing, co para Colaboración, cp para Comparador de Precios, ga para Google Ads, ba para Bing Ads, sc para Social): ")
 
     # Mapa de canales a clases
     canal_map = {
@@ -82,17 +82,17 @@ def main():
     }
 
     if canal_input not in canal_map:
-        print("Invalid channel. Please enter a valid code.")
+        print("Canal no encontrado. Por favor usa el código correcto.")
         return
 
     # Mostrar la plantilla del canal
     show_csv_template(canal_input)
 
     # Preguntar por el archivo CSV
-    input_file = input("Please enter the full path of the CSV file: ")
+    input_file = input("Por favor, introduce la ruta completa del fichero CSV. Por ejemplo C:\user\desktop\datos.csv: ")
 
     if not os.path.exists(input_file):
-        print(f"The file {input_file} does not exist.")
+        print(f"El fichero {input_file} no existe.")
         return
 
     # Llamar a la clase correspondiente para procesar el canal

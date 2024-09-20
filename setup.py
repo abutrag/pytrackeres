@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pytrackeres",
-    version="1.0.1",
+    version="1.0.2",
     author="abutrag",
     author_email="a.butragueno@eulerian.com",
     description="Herramienta para la generación de URLs de tracking.",
