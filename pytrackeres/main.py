@@ -89,7 +89,7 @@ def main():
     show_csv_template(canal_input)
 
     # Preguntar por el archivo CSV
-    input_file = input("Por favor, introduce la ruta completa del fichero CSV. Por ejemplo C:\user\desktop\datos.csv: ")
+    input_file = input(r"Por favor, introduce la ruta completa del fichero CSV. Por ejemplo C:\user\desktop\datos.csv: ")
 
     if not os.path.exists(input_file):
         print(f"El fichero {input_file} no existe.")
