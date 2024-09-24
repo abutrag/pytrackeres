@@ -64,11 +64,10 @@ def show_csv_template(channel):
     else:
         print("No hay una plantilla disponible para este canal.")
 
-def main():
-    # Preguntar por el canal primero
-    canal_input = input("Introduce el nombre del canal para procesar (dy para Display, af para Afiliación, em para Emailing, co para Colaboración, cp para Comparador de Precios, ga para Google Ads, ba para Bing Ads, sc para Social): ")
+def main(canal_input=None, input_file=None):
+    if canal_input is None:
+        canal_input = input("Introduce el nombre del canal para procesar (dy para Display, af para Afiliación, em para Emailing, co para Colaboración, cp para Comparador de Precios, ga para Google Ads, ba para Bing Ads, sc para Social): ")
 
-    # Mapa de canales a clases
     canal_map = {
         'dy': DisplayURLGenerator,
         'af': AfiliacionURLGenerator,
@@ -78,24 +77,21 @@ def main():
         'ga': GoogleAdsURLGenerator,
         'ba': BingAdsURLGenerator,
         'sc': SocialURLGenerator,
-        # Otros canales en el futuro
     }
 
     if canal_input not in canal_map:
         print("Canal no encontrado. Por favor usa el código correcto.")
         return
 
-    # Mostrar la plantilla del canal
     show_csv_template(canal_input)
 
-    # Preguntar por el archivo CSV
-    input_file = input(r"Por favor, introduce la ruta completa del fichero CSV. Por ejemplo C:\user\desktop\datos.csv: ")
+    if input_file is None:
+        input_file = input(r"Por favor, introduce la ruta completa del fichero CSV. Por ejemplo C:\user\desktop\datos.csv: ")
 
     if not os.path.exists(input_file):
         print(f"El fichero {input_file} no existe.")
         return
 
-    # Llamar a la clase correspondiente para procesar el canal
     generator_class = canal_map[canal_input]
     generator = generator_class(input_file)
     generator.process_csv()

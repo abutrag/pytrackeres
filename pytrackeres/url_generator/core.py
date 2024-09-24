@@ -1,13 +1,14 @@
-# url_generator/core.py
 
 from abc import ABC, abstractmethod
 import urllib.parse
 import csv
+from datetime import datetime
 
 class URLGeneratorBase(ABC):
     def __init__(self, input_file):
         self.input_file = input_file
         self.urls = []
+        self.canal = 'default_channel'  # Puedes cambiar esto o asignarlo dinámicamente según sea necesario
 
     @abstractmethod
     def validate_params(self, params):
@@ -52,9 +53,15 @@ class URLGeneratorBase(ABC):
 
         self.write_csv()
 
+    def generate_output_filename(self):
+        """Generates a unique output filename with date, time, and channel."""
+        now = datetime.now()
+        timestamp = now.strftime("%Y_%m_%d_%H_%M_%S")
+        return f"{timestamp}_urls_{self.canal}_generadas.csv"
+
     def write_csv(self):
         """Escribe las URLs generadas en un archivo CSV."""
-        output_file = self.input_file.replace('.csv', '_generadas.csv')
+        output_file = self.generate_output_filename()  # Usar el nombre con timestamp
         try:
             with open(output_file, mode='w', newline='', encoding='utf-8') as csvfile:
                 fieldnames = ['URL de Clic (Redirección)', 'URL de Impresión', 'URL de Clic (Tracking por Parámetros)']
@@ -66,4 +73,4 @@ class URLGeneratorBase(ABC):
             
             print(f"Las URLs generadas se han guardado en {output_file}.")
         except Exception as e:
-            print(f"Error al escribir el archivo CSV: {str(e)}")
+            print(f"Error al escribir el archivo: {str(e)}")
